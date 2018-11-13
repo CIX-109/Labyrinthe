@@ -1,4 +1,6 @@
-function Test() {   
+function Test() { 
+    kill = 2000;
+    if (kill > 1000) { Generation(); }
 }
 
 
@@ -10,7 +12,7 @@ window.onload = function Generation() {
     
     var xe = 1, ye = 1 //case d'entrée labyrinthe
     
-    var xs = 19, ys = 19; //case de sortie labyrinthe
+    var xs = 10, ys = 10; //case de sortie labyrinthe
     
     var r = 1; //demi-tour
     
@@ -26,6 +28,9 @@ window.onload = function Generation() {
         
     var Vx = false, Vy = false, Victory = false; //condition de victoire
     
+    var killMain = 0; //détecter les boucles infinies
+    var killNoWay = 0;
+    var killRandom = 0;
     
     //remplissage première ligne (0) tableaux
     xtab = [xe];
@@ -70,12 +75,28 @@ window.onload = function Generation() {
             Generation();
         }*/
         
+        j = Math.floor((Math.random() * 5) + 1);
+        k = Math.floor((Math.random() * 3) + 1);
+        
         //demi-tour si aucun chemin possible
         if (!N && !S && !E && !O) {
             
             ytab[i+1] = ytab[(i-r)];
             xtab[i+1] = xtab[(i-r)]; 
             r=r+2;
+            i++;
+        }
+        
+        //demi-tour sur quelques cases pour randomiser le chemin
+        else if (j == 1) {
+            if (i > k) {
+                for (j = 1; j <= k; j++) {
+                ytab[i+1] = ytab[(i-r)];
+                xtab[i+1] = xtab[(i-r)]; 
+                r=r+2;
+                i++;
+                }
+            }
         }
     
         
@@ -118,20 +139,18 @@ window.onload = function Generation() {
                     default:
                     k = 5;    
                 }
-                
             } while (k==5);
-        
-        } //fin else
         i++;
+        } //fin else
         
         //vérification des conditions de victoire
-        
-        if ((xtab[i]) == xs) { Vx = true; }
+                if ((xtab[i]) == xs) { Vx = true; }
         else { Vx = false; }
         if ((ytab[i]) == ys) { Vy = true; }
         else { Vy = false; }
         if ((Vx) && (Vy)) { Victory = true; }        
-        
+    
+    
     } while (!Victory);
     
     
