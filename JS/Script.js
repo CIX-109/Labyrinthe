@@ -4,13 +4,15 @@ function Test() {
 
 
 
-window.onload = function Generation() {
+//window.onload =
     
-    var xt = 10,  yt = 10; //largeur et hauteur labyrinthe
+function Generation() {
     
-    var xe = 5, ye = 0 //case d'entrée labyrinthe
+    var xt = 6,  yt = 6; //largeur et hauteur labyrinthe
     
-    var xs = 5, ys = 9; //case de sortie labyrinthe
+    var xe = 3, ye = 0 //case d'entrée labyrinthe
+    
+    var xs = 3, ys = 5; //case de sortie labyrinthe
     
     var r = 1; //demi-tour
     
@@ -70,6 +72,7 @@ window.onload = function Generation() {
             ytab[i+1] = ytab[(i-r)];
             xtab[i+1] = xtab[(i-r)]; 
             r=r+2;
+            
         }
     
         
@@ -119,6 +122,7 @@ window.onload = function Generation() {
         i++;
         
         //vérification des conditions de victoire
+        
         if ((xtab[i]) == xs) { Vx = true; }
         else { Vx = false; }
         if ((ytab[i]) == ys) { Vy = true; }
@@ -130,9 +134,9 @@ window.onload = function Generation() {
     
     //écriture liste des positions
     for (j = 0; j <= i; j++) {
-        document.write("Position " + j + " : ");
-        document.write(xtab[j] + " | ");
-        document.write(ytab[j] + "<br/>");
+        //document.write("Position " + j + " : ");
+        //document.write(xtab[j] + " | ");
+        //document.write(ytab[j] + "<br/>");
     }
     
     //réinitialisation direction
@@ -165,7 +169,11 @@ window.onload = function Generation() {
             if (S) { dtab[j]=dtab[j].concat("S"); }
             if (E) { dtab[j]=dtab[j].concat("E"); }
             if (O) { dtab[j]=dtab[j].concat("O"); }
-            document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>");
+            if (dtab[j] =="") { dtab[j]="x"; }
+            //document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>");
+            
+            document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>")
+            
             N = false;
             S = false;
             E = false;
