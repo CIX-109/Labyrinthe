@@ -4,19 +4,17 @@ function Test() {
 
 
 
-//window.onload =
+window.onload = function Generation() {
     
-function Generation() {
+    var xt = 10,  yt = 10; //largeur et hauteur labyrinthe
     
-    var xt = 6,  yt = 6; //largeur et hauteur labyrinthe
+    var xe = 5, ye = 0 //case d'entrée labyrinthe
     
-    var xe = 3, ye = 0 //case d'entrée labyrinthe
-    
-    var xs = 3, ys = 5; //case de sortie labyrinthe
+    var xs = 5, ys = 9; //case de sortie labyrinthe
     
     var r = 1; //demi-tour
     
-    var D; //direction N,S,E,O
+    //direction N,S,E,O
     var N = true, S = true, E = true, O = true;
     
     var i = 0; //position dans le labyrinthe
@@ -67,12 +65,17 @@ function Generation() {
         }
         
         //réinitialisation si aucun chemin possible
+        /*if (!N && !S && !E && !O) {
+            
+            Generation();*/
+        }
+        
+        //demi-tour si aucun chemin possible
         if (!N && !S && !E && !O) {
             
             ytab[i+1] = ytab[(i-r)];
             xtab[i+1] = xtab[(i-r)]; 
             r=r+2;
-            
         }
     
         
@@ -133,11 +136,11 @@ function Generation() {
     
     
     //écriture liste des positions
-    for (j = 0; j <= i; j++) {
-        //document.write("Position " + j + " : ");
-        //document.write(xtab[j] + " | ");
-        //document.write(ytab[j] + "<br/>");
-    }
+    /*for (j = 0; j <= i; j++) {
+        document.write("Position " + j + " : ");
+        document.write(xtab[j] + " | ");
+        document.write(ytab[j] + "<br/>");
+    }*/
     
     //réinitialisation direction
     N = false;
@@ -153,12 +156,12 @@ function Generation() {
             for (j = 1; j <= i; j++) { //balayage de toutes les positions (i)
                 if (((xtab[j]) == x) && ((ytab[j]) == y)) {
                 
-                    if ((ytab[j-1]) == (ytab[j]+1)) { N = true; }
-                    if ((ytab[j-1]) == (ytab[j]-1)) { S = true; }
+                    if ((ytab[j-1]) == (ytab[j]-1)) { N = true; }
+                    if ((ytab[j-1]) == (ytab[j]+1)) { S = true; }
                     if ((xtab[j-1]) == (xtab[j]+1)) { E = true; }
                     if ((xtab[j-1]) == (xtab[j]-1)) { O = true; }
-                    if ((ytab[j+1]) == (ytab[j]+1)) { N = true; }
-                    if ((ytab[j+1]) == (ytab[j]-1)) { S = true; }
+                    if ((ytab[j+1]) == (ytab[j]-1)) { N = true; }
+                    if ((ytab[j+1]) == (ytab[j]+1)) { S = true; }
                     if ((xtab[j+1]) == (xtab[j]+1)) { E = true; }
                     if ((xtab[j+1]) == (xtab[j]-1)) { O = true; }            
                     
@@ -169,16 +172,17 @@ function Generation() {
             if (S) { dtab[j]=dtab[j].concat("S"); }
             if (E) { dtab[j]=dtab[j].concat("E"); }
             if (O) { dtab[j]=dtab[j].concat("O"); }
-            if (dtab[j] =="") { dtab[j]="x"; }
-            //document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>");
+            if (dtab[j] =="") { dtab[j]="v"; }
             
-            document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>")
+            //document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>");
+            document.write("<img src='images/cases 2/" + dtab[j] + ".jpg' alt='" + dtab[j] + "' /></a>");
             
             N = false;
             S = false;
             E = false;
             O = false;
         } //fin balayage x
+        document.write("<br/>");
     } //fin balayage y*/
         
         
