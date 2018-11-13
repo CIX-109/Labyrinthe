@@ -6,11 +6,11 @@ function Test() {
 
 window.onload = function Generation() {
     
-    var xt = 10,  yt = 10; //largeur et hauteur labyrinthe
+    var xt = 20,  yt = 20; //largeur et hauteur labyrinthe
     
-    var xe = 5, ye = 0 //case d'entrée labyrinthe
+    var xe = 1, ye = 1 //case d'entrée labyrinthe
     
-    var xs = 5, ys = 9; //case de sortie labyrinthe
+    var xs = 19, ys = 19; //case de sortie labyrinthe
     
     var r = 1; //demi-tour
     
@@ -67,8 +67,8 @@ window.onload = function Generation() {
         //réinitialisation si aucun chemin possible
         /*if (!N && !S && !E && !O) {
             
-            Generation();*/
-        }
+            Generation();
+        }*/
         
         //demi-tour si aucun chemin possible
         if (!N && !S && !E && !O) {
@@ -151,9 +151,19 @@ window.onload = function Generation() {
     var x, y; //compteurs
     var dtab = new Array(); //création tableau D
     
-    for (y = 1; y < yt; y++) { //balayage de tous les y
+    //affichage des bordures Nord
+    document.write("<img src='images/cases 2/bNO.jpg' alt='bord' /></a>");
+    for (x = 1; x < xt; x++) {
+        document.write("<img src='images/cases 2/bN.jpg' alt='bord' /></a>");
+    }
+    document.write("<img src='images/cases 2/bNE.jpg' alt='bord' /></a><br/>");
+    
+    
+    for (y = 1; y < (yt); y++) { //balayage de tous les y
+        document.write("<img src='images/cases 2/bO.jpg' alt='bord' /></a>");
         for (x = 1; x < xt; x++) { //balayage de tous les x
-            for (j = 1; j <= i; j++) { //balayage de toutes les positions (i)
+            
+            for (j = 0; j <= i; j++) { //balayage de toutes les positions (i)
                 if (((xtab[j]) == x) && ((ytab[j]) == y)) {
                 
                     if ((ytab[j-1]) == (ytab[j]-1)) { N = true; }
@@ -165,8 +175,9 @@ window.onload = function Generation() {
                     if ((xtab[j+1]) == (xtab[j]+1)) { E = true; }
                     if ((xtab[j+1]) == (xtab[j]-1)) { O = true; }            
                     
-                } //fin if               
+                } //fin if 
             } //fin balayage i
+            
             dtab[j]="";
             if (N) { dtab[j]="N"; }
             if (S) { dtab[j]=dtab[j].concat("S"); }
@@ -175,15 +186,29 @@ window.onload = function Generation() {
             if (dtab[j] =="") { dtab[j]="v"; }
             
             //document.write("(" + x + ";" + y + "): " + dtab[j] + "<br/>");
-            document.write("<img src='images/cases 2/" + dtab[j] + ".jpg' alt='" + dtab[j] + "' /></a>");
+            if ((x == xe) && (y == ye)) {
+            document.write("<img src='images/casesE 2/" + dtab[j] + ".jpg' alt='" + dtab[j] + "' /></a>"); }
+        
+            else if ((x == xs) && (y == ys)) {
+            document.write("<img src='images/casesS 2/" + dtab[j] + ".jpg' alt='" + dtab[j] + "' /></a>"); }
+        
+            else {
+            document.write("<img src='images/cases 2/" + dtab[j] + ".jpg' alt='" + dtab[j] + "' /></a>"); }
             
             N = false;
             S = false;
             E = false;
             O = false;
         } //fin balayage x
-        document.write("<br/>");
-    } //fin balayage y*/
+        document.write("<img src='images/cases 2/bE.jpg' alt='bord' /></a><br/>");
+    } //fin balayage y
+    
+    //affichage des bordures Sud
+    document.write("<img src='images/cases 2/bSO.jpg' alt='bord' /></a>");
+    for (x = 1; x < xt; x++) {
+        document.write("<img src='images/cases 2/bS.jpg' alt='bord' /></a>");
+    }
+    document.write("<img src='images/cases 2/bSE.jpg' alt='bord' /></a><br/>");
         
         
     
